@@ -790,89 +790,24 @@ CLOSE
 
 <script>
 
-const products=[
+let products = [];
 
-{
-id:1,
-name:"Aurelia Gold Heels",
-category:"Heels",
-price:2499,
-old:2999,
-image:"https://images.unsplash.com/photo-1535043934128-cf4876faf2bd?auto=format&fit=crop&w=900&q=85",
-description:"Elegant gold heels designed for parties, weddings and special occasions."
-},
+async function loadProducts() {
+    const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .order("id");
 
-{
-id:2,
-name:"Luna Pearl Flats",
-category:"Flats",
-price:1499,
-old:1799,
-image:"https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=900&q=85",
-description:"Comfortable pearl-detail flats for effortless everyday elegance."
-},
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-{
-id:3,
-name:"Élan Crystal Sandals",
-category:"Party",
-price:2199,
-old:2699,
-image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85",
-description:"Crystal embellished sandals created for glamorous evening looks."
-},
-
-{
-id:4,
-name:"Mira Comfort Slides",
-category:"Casual",
-price:999,
-old:1299,
-image:"https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=900&q=85",
-description:"Lightweight casual sandals made for comfortable daily use."
-},
-
-{
-id:5,
-name:"Serena Block Heels",
-category:"Heels",
-price:1899,
-old:2299,
-image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85",
-description:"Modern block heels balancing elegance and comfort."
-},
-
-{
-id:6,
-name:"Bella Party Flats",
-category:"Party",
-price:1599,
-old:1999,
-image:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=85",
-description:"Beautiful embellished flats for festive occasions."
-},
-
-{
-id:7,
-name:"Nora Everyday Sandals",
-category:"Casual",
-price:899,
-old:1199,
-image:"https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=900&q=85",
-description:"Simple and versatile sandals for everyday wear."
-},
-
-{
-id:8,
-name:"Celeste Evening Heels",
-category:"Party",
-price:2799,
-old:3299,
-image:"https://images.unsplash.com/photo-1535043934128-cf4876faf2bd?auto=format&fit=crop&w=900&q=85",
-description:"Premium statement heels for unforgettable evenings."
+    products = data;
+    display(products);
 }
 
-];
+loadProducts();
 
 let cart=[];
 let selected=null;
