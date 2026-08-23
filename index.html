@@ -827,7 +827,7 @@ box.innerHTML+=`
 
 <div class="product-img">
 
-<img src="${p.image}"
+<img src="${p.image_url}"
 onclick="openProduct(${p.id})">
 
 <span class="badge">${p.category}</span>
@@ -846,7 +846,7 @@ onclick="this.innerText=this.innerText==='♡'?'♥':'♡'">
 <h3>${p.name}</h3>
 
 <div class="price">
-₹${p.price.toLocaleString()}
+₹${p.old_price.toLocaleString()}
 <span class="old">₹${p.old.toLocaleString()}</span>
 </div>
 
